@@ -8,6 +8,19 @@ RUN pip3 install Jinja2
 RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
+# Build Haskell dependencies that we typically use
+RUN stack build \
+  safe-exceptions \
+  conduit-extra xml-conduit http-conduit \
+  http-client \
+  warp \
+  servant-server servant-client servant-swagger \
+  swagger2 \
+  log \
+  lens \
+  tasty doctest \
+  haskell-src-exts hpack
+
 # Install dhall and various utilities
 RUN stack install dhall dhall-json dhall-text
 
