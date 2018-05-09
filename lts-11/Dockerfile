@@ -16,6 +16,7 @@ RUN stack build \
   warp \
   servant-server servant-client servant-swagger \
   swagger2 \
+	persistent-postgresql \
   log \
   lens \
   tasty doctest \
