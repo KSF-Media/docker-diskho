@@ -9,6 +9,11 @@ Kitchen-sink docker image for CI jobs.
 ### Content
 
 Based on `ubuntu-16.04`, and contains:
+- Everything from [the stackage base image](https://github.com/fpco/stackage/blob/master/debian-bootstrap.sh), e.g.:
+  - `nodejs` and `npm`
+  - `R`
+  - `java`
+  - Erlang stuff
 - `gcloud` (Google Cloud SDK) and related utils (e.g. `gsutil`, `kubectl`, etc.)
 - `docker`
 - `dhall`, and related utils (e.g. `dhall-json`, `dhall-yaml`, `dhall-text`)
