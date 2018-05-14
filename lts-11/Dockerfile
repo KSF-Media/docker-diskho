@@ -58,3 +58,17 @@ RUN apt-get install -qqy \
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
 RUN apt-get update -qqy && apt-get install -qqy docker-ce
+
+# Install terraform
+ENV TERRAFORM_VERSION=0.11.7
+ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
+ENV TERRAFORM_SHA256SUM=6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418
+
+RUN wget -q ${TERRAFORM_URL} \
+  && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
+RUN unzip ${TERRAFORM_FILENAME} -d /bin
+RUN rm -f ${TERRAFORM_FILENAME}
+
+# Other useful cli things
+RUN apt-get install -qqy jq
