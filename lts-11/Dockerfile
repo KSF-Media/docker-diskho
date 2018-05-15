@@ -25,6 +25,7 @@ RUN stack build \
 RUN stack install dhall dhall-json dhall-text
 
 # Install docker
+RUN apt-get -qqy update
 RUN apt-get install -qqy \
       curl \
       apt-transport-https \
