@@ -72,3 +72,4 @@ RUN rm -f ${TERRAFORM_FILENAME}
 
 # Other useful cli things
 RUN apt-get install -qqy jq
+RUN gcloud components install kubectl
