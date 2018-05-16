@@ -27,7 +27,7 @@ RUN stack install dhall dhall-text
 RUN git clone https://github.com/dhall-lang/dhall-json.git && \
     cd dhall-json && \
     git checkout 3e81615 && \
-    printf "extra-deps:\n- dhall-1.13.1" >> stack.yaml && \
+    printf "resolver: lts-11.9\nextra-deps:\n- dhall-1.13.1" > stack.yaml && \
     stack install
 
 # Install docker
@@ -86,6 +86,11 @@ RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
 RUN unzip ${TERRAFORM_FILENAME} -d /bin
 RUN rm -f ${TERRAFORM_FILENAME}
+
+# Install Cloud SQL Proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
+  chmod +x cloud_sql_proxy &&
+  mv cloud_sql_proxy /bin
 
 # Other useful cli things
 RUN apt-get install -qqy jq
