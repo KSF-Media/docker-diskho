@@ -89,7 +89,7 @@ RUN rm -f ${TERRAFORM_FILENAME}
 
 # Install Cloud SQL Proxy
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
-  chmod +x cloud_sql_proxy &&
+  chmod +x cloud_sql_proxy && \
   mv cloud_sql_proxy /bin
 
 # Other useful cli things
