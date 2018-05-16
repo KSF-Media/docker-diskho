@@ -22,13 +22,19 @@ RUN stack build \
   haskell-src-exts hpack
 
 # Install dhall and various utilities
-RUN stack install dhall dhall-text
-## We want the latest latest of dhall-json
+RUN stack install dhall
+## We want the latest latest of dhall-json and dhall-text
 RUN git clone https://github.com/dhall-lang/dhall-json.git && \
     cd dhall-json && \
     git checkout 3e81615 && \
     printf "resolver: lts-11.9\nextra-deps:\n- dhall-1.13.1" > stack.yaml && \
-    stack install
+    stack install && \
+    cd ..
+RUN git clone https://github.com/dhall-lang/dhall-text.git && \
+    cd dhall-text && \
+    printf "resolver: lts-11.9\n" > stack.yaml && \
+    stack install && \
+    cd ..
 
 # Install docker
 RUN apt-get -qqy update
