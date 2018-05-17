@@ -99,4 +99,4 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   mv cloud_sql_proxy /bin
 
 # Other useful cli things
-RUN apt-get install -qqy jq
+RUN apt-get install -qqy jq postgresql postgresql-contrib
