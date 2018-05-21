@@ -98,5 +98,11 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   chmod +x cloud_sql_proxy && \
   mv cloud_sql_proxy /bin
 
+# Install yarn
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -qqy nodejs yarn
+
 # Other useful cli things
 RUN apt-get install -qqy jq postgresql postgresql-contrib
