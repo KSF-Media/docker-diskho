@@ -1,4 +1,4 @@
-FROM fpco/stack-build:lts-11
+FROM fpco/stack-build:lts-11.14
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
@@ -27,12 +27,12 @@ RUN stack install dhall
 RUN git clone https://github.com/dhall-lang/dhall-json.git && \
     cd dhall-json && \
     git checkout 3e81615 && \
-    printf "resolver: lts-11.9\nextra-deps:\n- dhall-1.13.1" > stack.yaml && \
+    printf "resolver: lts-11.14\nextra-deps:\n- dhall-1.13.1" > stack.yaml && \
     stack install && \
     cd ..
 RUN git clone https://github.com/dhall-lang/dhall-text.git && \
     cd dhall-text && \
-    printf "resolver: lts-11.9\n" > stack.yaml && \
+    printf "resolver: lts-11.14\n" > stack.yaml && \
     stack install && \
     cd ..
 
