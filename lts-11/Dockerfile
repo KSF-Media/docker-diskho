@@ -32,7 +32,7 @@ RUN git clone https://github.com/dhall-lang/dhall-json.git && \
     cd ..
 RUN git clone https://github.com/dhall-lang/dhall-text.git && \
     cd dhall-text && \
-    git checkout 4e87eba && \
+    git checkout 911b249 && \
     printf "resolver: lts-11.14\n" > stack.yaml && \
     stack install && \
     cd ..
