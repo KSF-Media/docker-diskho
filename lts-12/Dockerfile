@@ -1,4 +1,4 @@
-FROM fpco/stack-build:lts-12.0
+FROM fpco/stack-build:lts-12.4
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
@@ -22,20 +22,7 @@ RUN stack build \
   haskell-src-exts hpack
 
 # Install dhall and various utilities
-RUN stack install dhall
-## We want the latest latest of dhall-json and dhall-text
-RUN git clone https://github.com/dhall-lang/dhall-json.git && \
-    cd dhall-json && \
-    git checkout 8840161 && \
-    printf "resolver: lts-12.0\nextra-deps:\n- dhall-1.13.1" > stack.yaml && \
-    stack install && \
-    cd ..
-RUN git clone https://github.com/dhall-lang/dhall-text.git && \
-    cd dhall-text && \
-    git checkout d62a668 && \
-    printf "resolver: lts-12.0\n" > stack.yaml && \
-    stack install && \
-    cd ..
+RUN stack install dhall dhall-json dhall-text --resolver=lts-12
 
 # Install docker
 RUN apt-get -qqy update
