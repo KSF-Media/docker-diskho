@@ -16,7 +16,6 @@ RUN stack build --resolver lts-12.4 \
   warp \
   servant-server servant-client servant-swagger \
   swagger2 \
-  log \
   lens \
   tasty doctest \
   haskell-src-exts hpack
