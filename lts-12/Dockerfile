@@ -1,4 +1,4 @@
-FROM fpco/stack-build:lts-12.4
+FROM fpco/stack-build:lts-12.7
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
