@@ -9,19 +9,20 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-12.7 \
+RUN stack build --resolver lts-12.21 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
   warp \
-  servant-server servant-client servant-swagger \
+  servant-server servant-client servant-swagger servant-swagger-ui \
   swagger2 \
-  lens \
+  lens aeson lens-aeson cassava rio \
   tasty doctest \
-  haskell-src-exts hpack
+  haskell-src-exts hpack \
+  persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall dhall-json dhall-text --resolver=lts-12
+RUN stack install dhall-1.19.1 dhall-json-1.2.5 dhall-text-1.0.14 --resolver=nightly-2018-12-02
 
 # Install docker
 RUN apt-get -qqy update
