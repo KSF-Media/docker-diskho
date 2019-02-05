@@ -95,3 +95,9 @@ RUN apt-get update && apt-get install -qqy nodejs yarn
 
 # Other useful cli things
 RUN apt-get install -qqy jq postgresql postgresql-contrib
+
+# Install rust nightly
+RUN curl https://sh.rustup.rs > rust-init
+RUN sh rust-init -y --default-toolchain nightly-2019-02-05
+ENV PATH="/root/.cargo/bin:$PATH"
+
