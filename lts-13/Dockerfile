@@ -101,3 +101,8 @@ RUN curl https://sh.rustup.rs > rust-init
 RUN sh rust-init -y --default-toolchain nightly-2019-02-05
 ENV PATH="/root/.cargo/bin:$PATH"
 
+# Install Golang
+RUN add-apt-repository -y ppa:longsleep/golang-backports
+RUN apt-get -qqy update
+RUN apt-get install -qqy golang-go
+
