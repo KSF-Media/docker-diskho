@@ -1,4 +1,4 @@
-FROM fpco/stack-build:lts-13.4
+FROM fpco/stack-build:lts-13.19
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
@@ -9,7 +9,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-13.4 \
+RUN stack build --resolver lts-13.19 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
@@ -22,7 +22,7 @@ RUN stack build --resolver lts-13.4 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall dhall-json dhall-text --resolver lts-13.4
+RUN stack install dhall-1.23.0 dhall-json-1.2.8 dhall-text-1.0.17 --resolver=nightly-2019-05-13
 
 # Install docker
 RUN apt-get -qqy update
@@ -37,7 +37,8 @@ RUN apt-get update -qqy && apt-get install -qqy docker-ce
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 229.0.0
+ENV CLOUD_SDK_VERSION 244.0.0
+ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
 RUN apt-get -qqy update && apt-get install -qqy \
         curl \
