@@ -1,4 +1,4 @@
-FROM fpco/stack-build:lts-14.7
+FROM fpco/stack-build:lts-14.16
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
@@ -9,7 +9,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-14.7 \
+RUN stack build --resolver lts-14.16 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
