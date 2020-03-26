@@ -23,7 +23,7 @@ RUN stack build --resolver lts-14.16 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall-1.23.0 dhall-json-1.2.8 dhall-text-1.0.17 --resolver=nightly-2019-05-13
+RUN stack install dhall-1.30.0 dhall-json-1.6.2 --resolver=nightly-2020-03-25
 
 # Install docker
 RUN apt-get -qqy update
