@@ -38,7 +38,7 @@ RUN apt-get update -qqy && apt-get install -qqy docker-ce
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 265.0.0
+ENV CLOUD_SDK_VERSION 294.0.0
 ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
 RUN apt-get -qqy update && apt-get install -qqy \
@@ -73,10 +73,10 @@ RUN apt-get -qqy update && apt-get install -qqy \
     docker --version && kubectl version --client
 
 # Install terraform
-ENV TERRAFORM_VERSION=0.11.13
+ENV TERRAFORM_VERSION=0.12.25
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
-ENV TERRAFORM_SHA256SUM=5925cd4d81e7d8f42a0054df2aafd66e2ab7408dbed2bd748f0022cfe592f8d2
+ENV TERRAFORM_SHA256SUM=e95daabd1985329f87e6d40ffe7b9b973ff0abc07a403f767e8658d64d733fb0
 
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
@@ -86,7 +86,8 @@ RUN rm -f ${TERRAFORM_FILENAME}
 # Install Cloud SQL Proxy
 RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy && \
   chmod +x cloud_sql_proxy && \
-  mv cloud_sql_proxy /bin
+  mv cloud_sql_proxy /bin && \
+  ln -s /bin/cloud_sql_proxy /bin/cloud-sql-proxy
 
 # Install yarn
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
