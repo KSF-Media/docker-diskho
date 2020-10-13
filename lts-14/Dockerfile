@@ -8,6 +8,9 @@ RUN pip3 install Jinja2
 RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
+# Update stack from version 2.3.1 to fix build issues
+RUN stack upgrade
+
 # Build Haskell dependencies that we typically use
 RUN stack build --resolver lts-14.16 \
   safe-exceptions \
