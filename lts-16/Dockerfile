@@ -9,7 +9,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-14.16 \
+RUN stack build --resolver lts-16.18 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
