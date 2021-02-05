@@ -23,7 +23,7 @@ RUN stack build --resolver lts-16.18 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall-1.30.0 dhall-json-1.6.2 --resolver=nightly-2020-03-25
+RUN stack install dhall-1.38.0 dhall-json-1.7.5 --resolver=nightly-2020-09-25
 
 # Install docker
 RUN apt-get -qqy update
@@ -73,10 +73,10 @@ RUN apt-get -qqy update && apt-get install -qqy \
     docker --version && kubectl version --client
 
 # Install terraform
-ENV TERRAFORM_VERSION=0.12.25
+ENV TERRAFORM_VERSION=0.14.5
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
-ENV TERRAFORM_SHA256SUM=e95daabd1985329f87e6d40ffe7b9b973ff0abc07a403f767e8658d64d733fb0
+ENV TERRAFORM_SHA256SUM=2899f47860b7752e31872e4d57b1c03c99de154f12f0fc84965e231bc50f312f
 
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
