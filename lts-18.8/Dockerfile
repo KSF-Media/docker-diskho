@@ -9,7 +9,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-17.15 \
+RUN stack build --resolver lts-18.8 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
@@ -76,10 +76,10 @@ RUN apt-get -qqy update && apt-get install -qqy \
     docker --version && kubectl version --client
 
 # Install terraform
-ENV TERRAFORM_VERSION=0.14.5
+ENV TERRAFORM_VERSION=1.0.7
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
-ENV TERRAFORM_SHA256SUM=2899f47860b7752e31872e4d57b1c03c99de154f12f0fc84965e231bc50f312f
+ENV TERRAFORM_SHA256SUM=bc79e47649e2529049a356f9e60e06b47462bf6743534a10a4c16594f443be7b
 
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
