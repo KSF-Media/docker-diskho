@@ -99,7 +99,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/so
 RUN apt-get update && apt-get install -qqy nodejs yarn
 
 # Other useful cli things
-RUN apt-get install -qqy jq postgresql postgresql-contrib
+RUN apt-get install -qqy jq postgresql postgresql-contrib libssh2-1-dev
 
 # Install rust nightly
 RUN curl https://sh.rustup.rs > rust-init
