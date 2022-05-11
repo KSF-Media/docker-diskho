@@ -23,7 +23,7 @@ RUN stack build --resolver lts-19.6 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall-1.38.0 dhall-json-1.7.5 --resolver=nightly-2020-09-25
+RUN stack install dhall-1.40.1 dhall-json-1.7.9 --resolver=nightly-2022-02-01
 
 RUN wget -qO - https://packages.confluent.io/deb/6.2/archive.key | sudo apt-key add -
 RUN sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/6.2 stable main"
@@ -41,7 +41,7 @@ RUN apt-get update -qqy && apt-get install -qqy docker-ce
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 294.0.0
+ENV CLOUD_SDK_VERSION 372.0.0
 ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
 RUN apt-get -qqy update && apt-get install -qqy \
@@ -76,11 +76,10 @@ RUN apt-get -qqy update && apt-get install -qqy \
     docker --version && kubectl version --client
 
 # Install terraform
-ENV TERRAFORM_VERSION=1.0.7
+ENV TERRAFORM_VERSION=1.1.5
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
-ENV TERRAFORM_SHA256SUM=bc79e47649e2529049a356f9e60e06b47462bf6743534a10a4c16594f443be7b
-
+ENV TERRAFORM_SHA256SUM=30942d5055c7151f051c8ea75481ff1dc95b2c4409dbb50196419c21168d6467
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
 RUN unzip ${TERRAFORM_FILENAME} -d /bin
