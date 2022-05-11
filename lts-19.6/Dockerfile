@@ -1,5 +1,8 @@
 FROM fpco/stack-build:lts-19.6
 
+RUN rm -f /etc/apt/sources.list.d/cuda.list*
+RUN apt-get update
+
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
 # As well as libyaml for pyaml and jinja2-cli for cli jinja tools
