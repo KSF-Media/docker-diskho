@@ -1,4 +1,7 @@
-FROM fpco/stack-build:lts-18.13
+FROM fpco/stack-build:lts-19.6
+
+RUN rm -f /etc/apt/sources.list.d/cuda.list*
+RUN apt-get update
 
 # Install gettext, contains the envsubst command, for env vars substitution
 # Also install python3 and Jinja2, needed for Kubernetes templating
@@ -9,7 +12,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-18.13 \
+RUN stack build --resolver lts-19.6 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
@@ -80,7 +83,6 @@ ENV TERRAFORM_VERSION=1.1.5
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
 ENV TERRAFORM_SHA256SUM=30942d5055c7151f051c8ea75481ff1dc95b2c4409dbb50196419c21168d6467
-
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
 RUN unzip ${TERRAFORM_FILENAME} -d /bin
@@ -93,7 +95,7 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   ln -s /bin/cloud_sql_proxy /bin/cloud-sql-proxy
 
 # Install yarn
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -qqy nodejs yarn
