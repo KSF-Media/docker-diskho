@@ -95,10 +95,12 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   ln -s /bin/cloud_sql_proxy /bin/cloud-sql-proxy
 
 # Install yarn
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -qqy nodejs yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -qqy nodejs
+RUN corepack enable
+RUN npm install -g npm@8.10.0
+RUN yarn set version stable
+RUN npm install --global --unsafe-perm=true dhall-to-yaml-cli@"1.7.6" dhall-to-json-cli@"1.7.6" puppeteer@"^14.1.1"
 
 # Other useful cli things
 RUN apt-get install -qqy jq postgresql postgresql-contrib libssh2-1-dev
