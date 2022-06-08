@@ -9,7 +9,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 # along with some useful cli tools
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
   gettext python3-pip libyaml-dev liblzma-dev software-properties-common \
-  jq postgresql postgresql-contrib libpq-dev libssh2-1-dev && \
+  jq postgresql postgresql-contrib libpq-dev libssh2-1-dev libpcre++-dev && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
 RUN pip3 install Jinja2
@@ -121,4 +121,3 @@ RUN add-apt-repository -y ppa:longsleep/golang-backports
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends golang-go && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
-
