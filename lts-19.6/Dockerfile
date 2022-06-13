@@ -51,7 +51,8 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 372.0.0
+ENV CLOUD_SDK_VERSION 389.0.0
+ENV USE_GKE_GCLOUD_AUTH_PLUGIN True
 ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
@@ -77,7 +78,8 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 	google-cloud-sdk-pubsub-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-bigtable-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-cbt=${CLOUD_SDK_VERSION}-0 \
-	kubectl && \
+	google-cloud-sdk-gke-gcloud-auth-plugin=${CLOUD_SDK_VERSION} \
+  kubectl && \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
