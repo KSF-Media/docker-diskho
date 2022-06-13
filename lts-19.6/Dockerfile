@@ -78,7 +78,7 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 	google-cloud-sdk-pubsub-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-bigtable-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-cbt=${CLOUD_SDK_VERSION}-0 \
-	google-cloud-sdk-gke-gcloud-auth-plugin=${CLOUD_SDK_VERSION} \
+	google-cloud-sdk-gke-gcloud-auth-plugin=${CLOUD_SDK_VERSION}-0 \
   kubectl && \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
