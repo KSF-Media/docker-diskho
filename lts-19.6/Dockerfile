@@ -31,7 +31,7 @@ RUN stack build --resolver lts-19.6 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall-1.40.1 dhall-json-1.7.9 --resolver=lts-19.6
+RUN stack install dhall-1.41.1 dhall-json-1.7.10 --resolver=lts-19.6
 
 RUN wget -qO - https://packages.confluent.io/deb/6.2/archive.key | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/6.2 stable main"
