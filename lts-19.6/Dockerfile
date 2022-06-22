@@ -123,3 +123,8 @@ RUN add-apt-repository -y ppa:longsleep/golang-backports
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends golang-go && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
+
+# Install rust nightly
+RUN curl https://sh.rustup.rs > rust-init
+RUN sh rust-init -y --default-toolchain 1.61
+ENV PATH="/root/.cargo/bin:$PATH"
