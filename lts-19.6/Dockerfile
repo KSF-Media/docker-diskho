@@ -123,3 +123,8 @@ RUN add-apt-repository -y ppa:longsleep/golang-backports
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends golang-go && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
+
+# Some additional dependencies we need that are missing from *-small images
+RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends pkg-config && \
+  apt-get -qqy clean && \
+	rm -rf /var/lib/apt/lists/*
