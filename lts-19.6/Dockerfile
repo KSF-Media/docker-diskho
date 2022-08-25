@@ -108,6 +108,13 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   mv cloud_sql_proxy /bin && \
   ln -s /bin/cloud_sql_proxy /bin/cloud-sql-proxy
 
+# Install puppeteer dependencies
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends google-chrome-stable fonts-freefont-ttf libxss1  \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install yarn
 RUN wget -qO - https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends nodejs && \

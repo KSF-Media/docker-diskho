@@ -108,14 +108,22 @@ RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql
   mv cloud_sql_proxy /bin && \
   ln -s /bin/cloud_sql_proxy /bin/cloud-sql-proxy
 
+# Install puppeteer dependencies
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -qqy --no-install-recommends google-chrome-stable fonts-freefont-ttf libxss1  \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install yarn
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends nodejs yarn && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
 RUN npm install --global --unsafe-perm=true dhall-to-yaml-cli@"1.7.6" dhall-to-json-cli@"1.7.6" puppeteer@"^13.1.3"
+
 
 # Install Golang
 RUN add-apt-repository -y ppa:longsleep/golang-backports
