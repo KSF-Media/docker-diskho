@@ -8,7 +8,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 # As well as libyaml for pyaml and jinja2-cli for cli jinja tools
 # along with some useful cli tools
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
-  gettext python3-pip libyaml-dev liblzma-dev software-properties-common \
+  gettext python3-pip libyaml-dev liblzma-dev software-properties-common sqitch \
   jq postgresql postgresql-contrib libpq-dev libssh2-1-dev libpcre++-dev && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
