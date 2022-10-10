@@ -9,7 +9,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 # along with some useful cli tools
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
   gettext python3-pip libyaml-dev liblzma-dev software-properties-common sqitch \
-  jq postgresql postgresql-contrib libpq-dev libssh2-1-dev libpcre++-dev && \
+  jq postgresql postgresql-contrib libpq-dev libssh2-1-dev libpcre++-dev libssl-dev && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
 RUN pip3 install Jinja2
@@ -51,7 +51,7 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 389.0.0
+ENV CLOUD_SDK_VERSION 404.0.0
 ENV USE_GKE_GCLOUD_AUTH_PLUGIN True
 ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
