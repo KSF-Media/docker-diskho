@@ -135,3 +135,6 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends golang-g
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends pkg-config && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
+
+# Symlink python to python3
+RUN ln -s /usr/bin/python3 /usr/bin/python
