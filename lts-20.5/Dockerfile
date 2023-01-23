@@ -136,5 +136,9 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends pkg-conf
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
 
+# Install helm
+RUN curl -fsSL -o helm.tgz https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz && \
+    tar xvf helm.tgz && mv linux-amd64/helm /usr/local/bin/helm && rm -rf linux-amd64 helm.tgz
+
 # Symlink python to python3
 RUN ln -s /usr/bin/python3 /usr/bin/python
