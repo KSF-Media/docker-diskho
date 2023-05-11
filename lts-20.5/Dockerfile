@@ -17,7 +17,7 @@ RUN pip3 install PyYAML
 RUN pip3 install jinja2-cli
 
 # Build Haskell dependencies that we typically use
-RUN stack build --resolver lts-19.6 \
+RUN stack build --resolver lts-20.5 \
   safe-exceptions \
   conduit-extra xml-conduit http-conduit \
   http-client \
@@ -31,7 +31,7 @@ RUN stack build --resolver lts-19.6 \
   persistent postgresql-simple persistent-postgresql persistent-template postgresql-libpq
 
 # Install dhall and various utilities
-RUN stack install dhall-1.41.1 dhall-json-1.7.10 --resolver=lts-19.6
+RUN stack install dhall-1.41.2 dhall-json-1.7.11 --resolver=lts-20.5
 
 RUN wget -qO - https://packages.confluent.io/deb/6.2/archive.key | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/6.2 stable main"
@@ -51,7 +51,7 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 
 # Install Google Cloud SDK
 # Code from here: https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/Dockerfile
-ENV CLOUD_SDK_VERSION 404.0.0
+ENV CLOUD_SDK_VERSION 430.0.0
 ENV USE_GKE_GCLOUD_AUTH_PLUGIN True
 ENV PATH "$PATH:/opt/google-cloud-sdk/bin/"
 
@@ -73,7 +73,6 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 	google-cloud-sdk-app-engine-python=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-app-engine-java=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-app-engine-go=${CLOUD_SDK_VERSION}-0 \
-	google-cloud-sdk-datalab=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-datastore-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-pubsub-emulator=${CLOUD_SDK_VERSION}-0 \
 	google-cloud-sdk-bigtable-emulator=${CLOUD_SDK_VERSION}-0 \
@@ -93,10 +92,10 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends unzip && \
   apt-get -qqy clean && \
 	rm -rf /var/lib/apt/lists/*
-ENV TERRAFORM_VERSION=1.1.5
+ENV TERRAFORM_VERSION=1.4.6
 ENV TERRAFORM_FILENAME=terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 ENV TERRAFORM_URL=https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${TERRAFORM_FILENAME}
-ENV TERRAFORM_SHA256SUM=30942d5055c7151f051c8ea75481ff1dc95b2c4409dbb50196419c21168d6467
+ENV TERRAFORM_SHA256SUM=e079db1a8945e39b1f8ba4e513946b3ab9f32bd5a2bdf19b9b186d22c5a3d53b
 RUN wget -q ${TERRAFORM_URL} \
   && echo "${TERRAFORM_SHA256SUM}  ${TERRAFORM_FILENAME}" | sha256sum -c
 RUN /usr/bin/unzip ${TERRAFORM_FILENAME} -d /bin
