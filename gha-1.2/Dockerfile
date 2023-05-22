@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 # Install base packages
 RUN apt-get update \
@@ -14,5 +14,5 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -qqy nodejs
 RUN corepack enable
 RUN npm install -g npm@8.10.0
-RUN yarn set version stable
+RUN yarn set version 1.22.19
 RUN npm install --global --unsafe-perm=true dhall-to-yaml-cli@"1.7.6" dhall-to-json-cli@"1.7.6" puppeteer@"^14.1.1"
