@@ -121,7 +121,9 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends nodejs &
 	rm -rf /var/lib/apt/lists/*
 RUN corepack enable
 RUN npm install -g npm@8.10.0
-RUN yarn set version stable
+RUN yarn set version 1.22.19
+
+# Install dhall-to-(yaml|json) and puppeteer
 RUN npm install --global --unsafe-perm=true dhall-to-yaml-cli@"1.7.6" dhall-to-json-cli@"1.7.6" puppeteer@"^14.1.1"
 
 # Install Golang
